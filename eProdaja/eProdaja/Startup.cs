@@ -1,8 +1,11 @@
+using eProdaja.Database;
+using eProdaja.Filter;
 using eProdaja.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,9 +29,18 @@ namespace eProdaja
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(x =>
+                x.Filters.Add<ErrorFilter>()
+            );
+
             services.AddSwaggerGen();
-            services.AddTransient<IProizvodService, ProizvodService>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<IProizvodService, ProizvodService>();
+            services.AddScoped<IKorisniciService, KorisniciService>();
+
+            services.AddDbContext<eProdajaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
