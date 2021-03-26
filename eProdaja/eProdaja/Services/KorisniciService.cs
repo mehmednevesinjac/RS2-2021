@@ -23,10 +23,11 @@ namespace eProdaja.Services
             return Context.Korisnicis.ToList().Select(k => _mapper.Map<Model.Korisnici>(k)).ToList();
         }
 
-        public Model.Korisnici GetById(int Id)
+        public Model.Korisnici GetById(int id)
         {
-            return null;
-         }
+            var entity = Context.Korisnicis.Find(id);
+            return _mapper.Map<Model.Korisnici>(entity);
+        }
 
         public Model.Korisnici Insert (KorisniciInsertRequest request)
         {

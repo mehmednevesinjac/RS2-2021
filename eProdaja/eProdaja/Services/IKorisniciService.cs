@@ -7,6 +7,6 @@ namespace eProdaja.Services
     {
         public List<Model.Korisnici> get();
         public Model.Korisnici Insert(KorisniciInsertRequest korisnik);
-        public Model.Korisnici GetById(int Id);
+        public Model.Korisnici GetById(int id);
     }
 }

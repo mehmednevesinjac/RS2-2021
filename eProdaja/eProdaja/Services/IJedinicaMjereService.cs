@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eProdaja
+namespace eProdaja.Services
 {
-    public class Proizvod
+    public interface IJedinicaMjereService : IReadService<Model.JediniceMjere,object>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }
